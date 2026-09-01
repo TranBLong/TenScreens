@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, Image, TouchableOpacity,  } from 'react-native';
+import { View, Text, Image, TouchableOpacity, ImageBackground } from 'react-native';
 import { SafeAreaView} from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import styles from './OnboardingStyles'; // Import styles từ OnboardingStyle.js
@@ -39,7 +39,12 @@ export default function OnboardingScreen({ onFinish }) {
 
   const currentItem = ONBOARDING_DATA[currentIndex];
 
-  return (
+  return (// 2. Bọc toàn bộ bằng ImageBackground với đường dẫn ảnh background
+    <ImageBackground
+      source={require('../../../../assets/images/login/splash/Background.png')}
+      style={{ flex: 1 }}
+      resizeMode="cover"
+    >
     <SafeAreaView style={styles.container}>
       {/* 1. Hình ảnh Mockup trên nền trắng */}
       <View style={styles.imageContainer}>
@@ -88,6 +93,6 @@ export default function OnboardingScreen({ onFinish }) {
           </TouchableOpacity>
         </View>
       </View>
-    </SafeAreaView>
+    </SafeAreaView></ImageBackground>
   );
 }
