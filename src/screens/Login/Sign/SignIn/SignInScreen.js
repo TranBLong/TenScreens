@@ -15,7 +15,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 import styles from "./SignInStyle";
 
-export default function SignInScreen({ onNavigateSignUp, onSignInSuccess }) {
+export default function SignInScreen({ onNavigateSignUp, onSignInSuccess, handleGoogleLogin, handleFacebookLogin }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
@@ -126,7 +126,7 @@ export default function SignInScreen({ onNavigateSignUp, onSignInSuccess }) {
             <Text style={styles.orText}>OR</Text>
 
             {/* Nút Đăng nhập MXH */}
-            <TouchableOpacity style={styles.socialButton}>
+            <TouchableOpacity style={styles.socialButton} onPress={handleGoogleLogin}>
               <Image
                 source={require("../../../../../assets/icon/Logo/LogoGoogle.png")}
                 style={styles.socialIcon}
@@ -135,7 +135,7 @@ export default function SignInScreen({ onNavigateSignUp, onSignInSuccess }) {
               <Text style={styles.socialButtonText}>Login with Google</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.socialButton}>
+            <TouchableOpacity style={styles.socialButton} onPress={handleFacebookLogin}>
               <Image
                 source={require("../../../../../assets/icon/Logo/LogoFacebook.png")}
                 style={styles.socialIcon}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SplashScreen, OnboardingScreen, HomeScreens, SignInScreen } from './screens/link';
+import { SplashScreen, OnboardingScreen, HomeScreens, SignInScreen, SignUpScreen } from './screens/link';
 
 export default function MainApp() {
   const [currentScreen, setCurrentScreen] = useState('splash');
@@ -14,5 +14,11 @@ export default function MainApp() {
     return <SignInScreen onNavigateSignUp={() => setCurrentScreen('signup')}
     onSignUpSuccess={() => setCurrentScreen('home')} />;
   }
+  if (currentScreen === 'signup') {
+    return <SignUpScreen
+  onNavigateSignIn={() => setCurrentScreen('signin')} //Về lại Sign In
+  onSignUpSuccess={() => setCurrentScreen('verification')} 
+  onBack={() => setCurrentScreen('signin')} />;//Nút back góc trên
+}
   return <HomeScreens />;
 }

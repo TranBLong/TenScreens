@@ -87,6 +87,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 10,
     elevation: 4,
+    width: "80%",
+    alignSelf: "center",
   },
   signInButtonText: {
     color: "#FFFFFF",
@@ -107,8 +109,8 @@ const styles = StyleSheet.create({
   orText: {
     textAlign: "center",
     color: "#9D9898",
-    fontSize: 14,
-    fontWeight: "bold",
+    fontSize: 16,
+    fontWeight: "400",
     marginVertical: 20,
   },
   socialButton: {
@@ -121,6 +123,8 @@ const styles = StyleSheet.create({
     height: 56,
     marginBottom: 16,
     backgroundColor: "#FFFFFF",
+    width: "80%",
+    alignSelf: "center",
   },
   socialIcon: {
     width: 22,
