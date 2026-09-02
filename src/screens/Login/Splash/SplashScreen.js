@@ -12,7 +12,7 @@ export default function SplashScreen({ onNext }) {
     >
       <View style={styles.container}>
         <Image
-          source={require('../../../../assets/icon/login/splash/Logo.png')}
+          source={require('../../../../assets/icon/login/splash/Logotype.png')}
           style={styles.logo}
           resizeMode="contain"
         />
