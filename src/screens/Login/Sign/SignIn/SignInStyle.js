@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "transparent", // Đặt nền trong suốt để hiển thị hình nền
     paddingHorizontal: 28,
   },
   contentContainer: {
