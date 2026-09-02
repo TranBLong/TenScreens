@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -9,21 +9,21 @@ import {
   Platform,
   ScrollView,
   Image,
-} from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { Ionicons } from '@expo/vector-icons';
-import styles from './SignInStyle';
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { Ionicons } from "@expo/vector-icons";
+import styles from "./SignInStyle";
 
 export default function SignInScreen({ onNavigateSignUp, onSignInSuccess }) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={{ flex: 1 }}
       >
         <ScrollView
@@ -32,7 +32,11 @@ export default function SignInScreen({ onNavigateSignUp, onSignInSuccess }) {
         >
           {/* Logo EventHub */}
           <View style={styles.logoContainer}>
-            <Image source={require('../../../../../assets/icon/Logo/PictorialMark.png')} style={styles.logoImage} resizeMode="contain" />
+            <Image
+              source={require("../../../../../assets/icon/Logo/PictorialMark.png")}
+              style={styles.logoImage}
+              resizeMode="contain"
+            />
             <Text style={styles.appName}>EventHub</Text>
           </View>
 
@@ -41,9 +45,11 @@ export default function SignInScreen({ onNavigateSignUp, onSignInSuccess }) {
           {/* Ô nhập Email */}
           <View style={styles.inputWrapper}>
             <View style={styles.inputContainer}>
-                <Image source={require('../../../../../assets/icon/login/signup/Mail.png')}
+              <Image
+                source={require("../../../../../assets/icon/login/signup/Mail.png")}
                 style={styles.inputIcon}
-                resizeMode="contain"/>
+                resizeMode="contain"
+              />
               <TextInput
                 style={styles.input}
                 placeholder="abc@email.com"
@@ -59,9 +65,11 @@ export default function SignInScreen({ onNavigateSignUp, onSignInSuccess }) {
           {/* Ô nhập Mật khẩu */}
           <View style={styles.inputWrapper}>
             <View style={styles.inputContainer}>
-                <Image source={require('../../../../../assets/icon/login/signup/Password.png')}
+              <Image
+                source={require("../../../../../assets/icon/login/signup/Password.png")}
                 style={styles.inputIcon}
-                resizeMode="contain"/>
+                resizeMode="contain"
+              />
               <TextInput
                 style={styles.input}
                 placeholder="Your password"
@@ -71,7 +79,11 @@ export default function SignInScreen({ onNavigateSignUp, onSignInSuccess }) {
                 onChangeText={setPassword}
               />
               <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
-<Ionicons name={showPassword ? 'eye-off' : 'eye'} size={24} color="#747688" />
+                <Ionicons
+                  name={showPassword ? "eye-off" : "eye"}
+                  size={24}
+                  color="#747688"
+                />
               </TouchableOpacity>
             </View>
           </View>
@@ -82,7 +94,7 @@ export default function SignInScreen({ onNavigateSignUp, onSignInSuccess }) {
               <Switch
                 value={rememberMe}
                 onValueChange={setRememberMe}
-                trackColor={{ false: '#E4DFDF', true: '#5669FF' }}
+                trackColor={{ false: "#E4DFDF", true: "#5669FF" }}
                 thumbColor="#FFFFFF"
               />
               <Text style={styles.rememberText}>Remember Me</Text>
@@ -93,10 +105,13 @@ export default function SignInScreen({ onNavigateSignUp, onSignInSuccess }) {
           </View>
 
           {/* Nút Sign In */}
-          <TouchableOpacity style={styles.signInButton} onPress={onSignInSuccess}>
+          <TouchableOpacity
+            style={styles.signInButton}
+            onPress={onSignInSuccess}
+          >
             <Text style={styles.signInButtonText}>SIGN IN</Text>
             <View style={styles.arrowCircle}>
-                <Ionicons name="arrow-forward" size={24} color="#FFFFFF" />
+              <Ionicons name="arrow-forward" size={24} color="#FFFFFF" />
             </View>
           </TouchableOpacity>
 
@@ -104,12 +119,20 @@ export default function SignInScreen({ onNavigateSignUp, onSignInSuccess }) {
 
           {/* Nút Đăng nhập MXH */}
           <TouchableOpacity style={styles.socialButton}>
-            <Image source={require('../../../../../assets/icon/Logo/LogoGoogle.png')} style={styles.socialIcon} resizeMode="contain" />
+            <Image
+              source={require("../../../../../assets/icon/Logo/LogoGoogle.png")}
+              style={styles.socialIcon}
+              resizeMode="contain"
+            />
             <Text style={styles.socialButtonText}>Login with Google</Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.socialButton}>
-            <Image source={require('../../../../../assets/icon/Logo/LogoFacebook.png')} style={styles.socialIcon} resizeMode="contain" />
+            <Image
+              source={require("../../../../../assets/icon/Logo/LogoFacebook.png")}
+              style={styles.socialIcon}
+              resizeMode="contain"
+            />
             <Text style={styles.socialButtonText}>Login with Facebook</Text>
           </TouchableOpacity>
 
