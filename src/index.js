@@ -11,6 +11,7 @@ import {
 
 export default function MainApp() {
   const [currentScreen, setCurrentScreen] = useState("splash");
+  const [verifySource, setVerifySource] = useState("signup"); // Lưu nguồn tới Verification ('signup' hoặc 'resetPassword')
 
   if (currentScreen === "splash") {
     return <SplashScreen onNext={() => setCurrentScreen("onboarding")} />;
@@ -22,35 +23,49 @@ export default function MainApp() {
     return (
       <SignInScreen
         onNavigateSignUp={() => setCurrentScreen("signup")}
-        onSignUpSuccess={() => setCurrentScreen("home")}
-        onNavigateResetPassword={() => setCurrentScreen("resetPassword")} //Đi tới Reset Password 
+        onSignInSuccess={() => setCurrentScreen("home")}
+        onNavigateResetPassword={() => setCurrentScreen("resetPassword")}
       />
     );
   }
   if (currentScreen === "signup") {
     return (
       <SignUpScreen
-        onNavigateSignIn={() => setCurrentScreen("signin")} //Về lại Sign In
-        onSignUpSuccess={() => setCurrentScreen("verification")}
+        onNavigateSignIn={() => setCurrentScreen("signin")}
+        onSignUpSuccess={() => {
+          setVerifySource("signup"); // Đánh dấu từ Sign Up sang
+          setCurrentScreen("verification");
+        }}
         onBack={() => setCurrentScreen("signin")}
-      />
-    ); //Nút back góc trên
-  }
-  if (currentScreen === "verification") {
-    return (
-      <VerificationScreen
-        onBack={() => setCurrentScreen("signup")} //Quay lại màn hình Sign Up
-        onVerifySuccess={() => setCurrentScreen("home")} //Verify thành công thì vào HomeScreens
       />
     );
   }
   if (currentScreen === "resetPassword") {
     return (
       <ResetPasswordScreen
-        onBack={() => setCurrentScreen("signin")} //Quay lại màn hình Sign In
-        onSendSuccess={() => setCurrentScreen("verification")} //Sau khi gửi thành công thì vào màn hình Verification
+        onBack={() => setCurrentScreen("signin")}
+        onSendSuccess={() => {
+          setVerifySource("resetPassword"); // Đánh dấu từ Reset Password sang
+          setCurrentScreen("verification");
+        }}
       />
-    )
+    );
+  }
+  if (currentScreen === "verification") {
+    return (
+      <VerificationScreen
+        // Back đúng màn hình đã đứng trước đó
+        onBack={() => setCurrentScreen(verifySource === "signup" ? "signup" : "resetPassword")}
+        // Xử lý đích đến phù hợp với từng mục đích xác thực
+        onVerifySuccess={() => {
+          if (verifySource === "signup") {
+            setCurrentScreen("home");
+          } else {
+            setCurrentScreen("signin"); // Hoặc điều hướng sang màn NewPasswordScreen nếu có
+          }
+        }}
+      />
+    );
   }
   return <HomeScreens />;
 }
