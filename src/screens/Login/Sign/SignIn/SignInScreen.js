@@ -15,7 +15,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 import styles from "./SignInStyle";
 
-export default function SignInScreen({ onNavigateSignUp, onSignInSuccess, handleGoogleLogin, handleFacebookLogin }) {
+export default function SignInScreen({ onNavigateSignUp, onSignInSuccess, handleGoogleLogin, handleFacebookLogin, onNavigateResetPassword }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
@@ -107,7 +107,7 @@ export default function SignInScreen({ onNavigateSignUp, onSignInSuccess, handle
                 />
                 <Text style={styles.rememberText}>Remember Me</Text>
               </View>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={onNavigateResetPassword}>
                 <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
               </TouchableOpacity>
             </View>

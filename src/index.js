@@ -6,6 +6,7 @@ import {
   SignInScreen,
   SignUpScreen,
   VerificationScreen,
+  ResetPasswordScreen
 } from "./screens/link";
 
 export default function MainApp() {
@@ -22,6 +23,7 @@ export default function MainApp() {
       <SignInScreen
         onNavigateSignUp={() => setCurrentScreen("signup")}
         onSignUpSuccess={() => setCurrentScreen("home")}
+        onNavigateResetPassword={() => setCurrentScreen("resetPassword")} //Đi tới Reset Password 
       />
     );
   }
@@ -41,6 +43,14 @@ export default function MainApp() {
         onVerifySuccess={() => setCurrentScreen("home")} //Verify thành công thì vào HomeScreens
       />
     );
+  }
+  if (currentScreen === "resetPassword") {
+    return (
+      <ResetPasswordScreen
+        onBack={() => setCurrentScreen("signin")} //Quay lại màn hình Sign In
+        onSendSuccess={() => setCurrentScreen("verification")} //Sau khi gửi thành công thì vào màn hình Verification
+      />
+    )
   }
   return <HomeScreens />;
 }
