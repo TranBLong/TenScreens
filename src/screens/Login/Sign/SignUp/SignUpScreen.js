@@ -100,7 +100,7 @@ export default function SignUpScreen({ onNavigateSignIn, onSignUpSuccess, onBack
                 />
                 <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
                   <Ionicons
-                    name={showPassword ? "eye-off" : "eye-off-outline"} // Dùng icon gạch chéo theo thiết kế
+                    name={showPassword ? "eye-off" : "eye"} // Dùng icon gạch chéo theo thiết kế
                     size={24}
                     color="#747688"
                   />

@@ -92,6 +92,7 @@ export default function VerificationScreen({ onBack, onVerifySuccess }) {
                   placeholder="-"
                   placeholderTextColor="#D0D0D0"
                   cursorColor="#5669FF"
+                  selectionColor="#5669FF"
                 />
               ))}
             </View>
