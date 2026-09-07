@@ -7,45 +7,55 @@ import {
   TouchableOpacity,
   ScrollView,
   FlatList,
-  SafeAreaView,
-  StatusBar,
 } from 'react-native';
-import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { DrawerActions } from '@react-navigation/native';
 import styles from './HomeStyles';
 
-// Danh mục lọc sự kiện - icon + màu nền riêng cho từng loại
 const CATEGORIES = [
-  { id: '1', label: 'Sports', icon: 'basketball-outline', bg: '#FF7A59' },
-  { id: '2', label: 'Music', icon: 'musical-notes-outline', bg: '#7A5CFA' },
-  { id: '3', label: 'Food', icon: 'restaurant-outline', bg: '#2ECC71' },
+  { id: '1', label: 'Sports', icon: 'basketball-outline', bg: '#F0635A' },
+  { id: '2', label: 'Music', icon: 'musical-notes-outline', bg: '#F59762' },
+  { id: '3', label: 'Food', icon: 'restaurant-outline', bg: '#29D697' },
+  { id: '4', label: 'Art', icon: 'color-palette-outline', bg: '#00D2FF' },
 ];
 
-// Dữ liệu mẫu - thực tế nên fetch từ API
 const UPCOMING_EVENTS = [
   {
     id: '1',
     date: '10',
     month: 'JUNE',
-    title: 'International Band Music Concert',
-    image: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400',
+    title: 'International Band Mu...',
+    image: require('../../../../assets/images/home/mainscreens/handmotherandson.png'),
     going: 20,
+    address: '36 Guild Street London, UK',
+    avatars: [
+      require('../../../../assets/images/home/mainscreens/miniavatar/ovalcopy4.png'),
+      require('../../../../assets/images/home/mainscreens/miniavatar/ovalcopy.png'),
+      require('../../../../assets/images/home/mainscreens/miniavatar/oval.png'),
+    ],
   },
   {
     id: '2',
     date: '10',
     month: 'JUNE',
-    title: "Jo Malone London's Day",
-    image: 'https://images.unsplash.com/photo-1519677100203-a0e668c92439?w=400',
-    going: 12,
+    title: "Jo Malone London's...",
+    image: require('../../../../assets/images/home/mainscreens/trainers.png'),
+    going: 20,
+    address: 'Radius Gallery London, UK',
+    avatars: [
+      require('../../../../assets/images/home/mainscreens/miniavatar/ovalcopy4.png'),
+      require('../../../../assets/images/home/mainscreens/miniavatar/ovalcopy.png'),
+      require('../../../../assets/images/home/mainscreens/miniavatar/oval.png'),
+    ],
   },
 ];
 
 const BOTTOM_TABS = [
-  { id: '1', label: 'Explore', icon: 'compass-outline' },
+  { id: '1', label: 'Explore', icon: 'compass' },
   { id: '2', label: 'Events', icon: 'calendar-outline' },
-  { id: '3', label: 'Map', icon: 'map-outline' },
-  { id: '4', label: 'Filter', icon: 'options-outline' },
+  { id: '3', label: 'Map', icon: 'location-outline' },
+  { id: '4', label: 'Profile', icon: 'person-outline' },
 ];
 
 const HomeScreen = ({ navigation }) => {
@@ -54,8 +64,6 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <StatusBar barStyle="light-content" backgroundColor="#5B4FF0" />
-
       <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
         {/* ---------- Header ---------- */}
         <View style={styles.header}>
@@ -63,64 +71,81 @@ const HomeScreen = ({ navigation }) => {
             <TouchableOpacity
               onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
             >
-              <Ionicons name="menu" size={26} color="#FFFFFF" />
+              <Ionicons name="menu-outline" size={28} color="#FFFFFF" />
             </TouchableOpacity>
 
             <View style={styles.locationBox}>
-              <Text style={styles.locationLabel}>Current Location</Text>
+              <View style={styles.locationLabelRow}>
+                <Text style={styles.locationLabel}>Current Location</Text>
+                <Ionicons name="caret-down" size={12} color="#FFFFFF" />
+              </View>
               <Text style={styles.locationValue}>New York, USA</Text>
             </View>
 
-            <TouchableOpacity onPress={() => navigation.navigate('Notifications')}>
-              <Ionicons name="notifications-outline" size={24} color="#FFFFFF" />
+            <TouchableOpacity
+              style={styles.notificationBtn}
+              onPress={() => navigation.navigate('Notifications')}
+            >
+              <Ionicons name="notifications-outline" size={20} color="#FFFFFF" />
             </TouchableOpacity>
           </View>
 
           {/* Search bar */}
           <View style={styles.searchRow}>
             <View style={styles.searchBox}>
-              <Ionicons name="search" size={18} color="#8A8AA3" />
+              <Ionicons name="search" size={20} color="#FFFFFF" />
+              <View style={styles.searchDivider} />
               <TextInput
                 placeholder="Search..."
-                placeholderTextColor="#8A8AA3"
+                placeholderTextColor="rgba(255, 255, 255, 0.6)"
                 style={styles.searchInput}
                 value={searchText}
                 onChangeText={setSearchText}
               />
             </View>
+
             <TouchableOpacity
               style={styles.filterButton}
               onPress={() => navigation.navigate('Filter')}
             >
-              <Ionicons name="options-outline" size={16} color="#5B4FF0" />
+              <Ionicons name="options-outline" size={16} color="#FFFFFF" />
               <Text style={styles.filterText}>Filters</Text>
             </TouchableOpacity>
           </View>
         </View>
 
-        {/* ---------- Category pills ---------- */}
-        <View style={styles.categoryRow}>
+        {/* ---------- Horizontal Category Pills ---------- */}
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          style={styles.categoryScroll}
+          contentContainerStyle={styles.categoryContainer}
+        >
           {CATEGORIES.map((cat) => (
             <TouchableOpacity
               key={cat.id}
               style={[
                 styles.categoryPill,
                 { backgroundColor: cat.bg },
-                activeCategory === cat.id && styles.categoryPillActive,
               ]}
               onPress={() => setActiveCategory(cat.id)}
+              activeOpacity={0.8}
             >
-              <Ionicons name={cat.icon} size={16} color="#FFFFFF" />
+              <Ionicons name={cat.icon} size={18} color="#FFFFFF" />
               <Text style={styles.categoryLabel}>{cat.label}</Text>
             </TouchableOpacity>
           ))}
-        </View>
+        </ScrollView>
 
         {/* ---------- Upcoming Events ---------- */}
         <View style={styles.sectionHeader}>
           <Text style={styles.sectionTitle}>Upcoming Events</Text>
-          <TouchableOpacity onPress={() => navigation.navigate('SeeAllEvents')}>
-            <Text style={styles.seeAll}>See All ›</Text>
+          <TouchableOpacity
+            style={styles.seeAllRow}
+            onPress={() => navigation.navigate('SeeAllEvents')}
+          >
+            <Text style={styles.seeAll}>See All</Text>
+            <Ionicons name="caret-forward" size={12} color="#747688" />
           </TouchableOpacity>
         </View>
 
@@ -133,27 +158,58 @@ const HomeScreen = ({ navigation }) => {
           renderItem={({ item }) => (
             <TouchableOpacity
               style={styles.eventCard}
-              activeOpacity={0.85}
+              activeOpacity={0.9}
               onPress={() => navigation.navigate('EventDetails', { id: item.id })}
             >
-              <Image source={{ uri: item.image }} style={styles.eventImage} />
-              <View style={styles.eventDateBadge}>
-                <Text style={styles.eventDateNum}>{item.date}</Text>
-                <Text style={styles.eventDateMonth}>{item.month}</Text>
+              <View style={styles.imageContainer}>
+                <Image source={typeof item.image === 'string' ? { uri: item.image } : item.image} style={styles.eventImage} />
+
+                {/* Date badge */}
+                <View style={styles.eventDateBadge}>
+                  <Text style={styles.eventDateNum}>{item.date}</Text>
+                  <Text style={styles.eventDateMonth}>{item.month}</Text>
+                </View>
+
+                {/* Bookmark button */}
+                <TouchableOpacity style={styles.bookmarkBadge}>
+                  <Ionicons name="bookmark" size={14} color="#EB5757" />
+                </TouchableOpacity>
               </View>
+
               <View style={styles.eventInfo}>
-                <Text style={styles.eventTitle} numberOfLines={2}>
+                <Text style={styles.eventTitle} numberOfLines={1}>
                   {item.title}
                 </Text>
-                <Text style={styles.eventGoing}>+{item.going} Going</Text>
+
+                {/* Avatar stack + going */}
+                <View style={styles.goingContainer}>
+                  <View style={styles.avatarStack}>
+                    {item.avatars.map((avatarSource, index) => (
+                      <Image
+                        key={index}
+                        source={typeof avatarSource === 'string' ? { uri: avatarSource } : avatarSource}
+                        style={[styles.avatar, { zIndex: 3 - index }]}
+                      />
+                    ))}
+                  </View>
+                  <Text style={styles.eventGoing}>+{item.going} Going</Text>
+                </View>
+
+                {/* Location row */}
+                <View style={styles.locationRow}>
+                  <Ionicons name="location" size={14} color="#747688" />
+                  <Text style={styles.locationText} numberOfLines={1}>
+                    {item.address}
+                  </Text>
+                </View>
               </View>
             </TouchableOpacity>
           )}
         />
 
-        {/* ---------- Invite friends banner ---------- */}
+        {/* ---------- Invite Friends Banner ---------- */}
         <View style={styles.inviteBanner}>
-          <View style={{ flex: 1 }}>
+          <View style={{ flex: 1, zIndex: 2 }}>
             <Text style={styles.inviteTitle}>Invite your friends</Text>
             <Text style={styles.inviteSubtitle}>Get $20 for ticket</Text>
             <TouchableOpacity
@@ -163,51 +219,62 @@ const HomeScreen = ({ navigation }) => {
               <Text style={styles.inviteButtonText}>INVITE</Text>
             </TouchableOpacity>
           </View>
-          <MaterialCommunityIcons name="gift-outline" size={56} color="#FFFFFF" />
+          <Image
+            source={require('../../../../assets/images/home/mainscreens/openthegift.png')}
+            style={styles.giftImage}
+          />
         </View>
 
         {/* ---------- Nearby You ---------- */}
         <View style={styles.sectionHeader}>
           <Text style={styles.sectionTitle}>Nearby You</Text>
-          <TouchableOpacity onPress={() => navigation.navigate('SeeAllEvents')}>
-            <Text style={styles.seeAll}>See All ›</Text>
+          <TouchableOpacity
+            style={styles.seeAllRow}
+            onPress={() => navigation.navigate('SeeAllEvents')}
+          >
+            <Text style={styles.seeAll}>See All</Text>
+            <Ionicons name="caret-forward" size={12} color="#747688" />
           </TouchableOpacity>
         </View>
 
-        <View style={{ height: 100 }} />
+        <View style={{ height: 20 }} />
       </ScrollView>
 
-      {/* ---------- Bottom Tab + FAB ---------- */}
+      {/* ---------- Bottom Navigation ---------- */}
       <View style={styles.bottomTab}>
-        {BOTTOM_TABS.slice(0, 2).map((tab) => (
-          <TouchableOpacity
-            key={tab.id}
-            style={styles.tabItem}
-            onPress={() => navigation.navigate(tab.label)}
-          >
-            <Ionicons name={tab.icon} size={22} color="#8A8AA3" />
-            <Text style={styles.tabLabel}>{tab.label}</Text>
-          </TouchableOpacity>
-        ))}
-
-        {/* Nút tròn nổi ở giữa */}
-        <TouchableOpacity
-          style={styles.fab}
-          onPress={() => navigation.navigate('AddEvent')}
-        >
-          <Ionicons name="add" size={28} color="#FFFFFF" />
+        {/* Tab Explore */}
+        <TouchableOpacity style={styles.tabItem}>
+          <Ionicons name="compass" size={22} color="#5669FF" />
+          <Text style={[styles.tabLabel, styles.activeTabLabel]}>Explore</Text>
         </TouchableOpacity>
 
-        {BOTTOM_TABS.slice(2).map((tab) => (
+        {/* Tab Events */}
+        <TouchableOpacity style={styles.tabItem}>
+          <Ionicons name="calendar-outline" size={22} color="#2B2849" style={{ opacity: 0.4 }} />
+          <Text style={styles.tabLabel}>Events</Text>
+        </TouchableOpacity>
+
+        {/* Nút FAB ở giữa */}
+        <View style={styles.fabContainer}>
           <TouchableOpacity
-            key={tab.id}
-            style={styles.tabItem}
-            onPress={() => navigation.navigate(tab.label)}
+            style={styles.fab}
+            onPress={() => navigation.navigate('AddEvent')}
           >
-            <Ionicons name={tab.icon} size={22} color="#8A8AA3" />
-            <Text style={styles.tabLabel}>{tab.label}</Text>
+            <MaterialIcons name="add-box" size={22} color="#FFFFFF" />
           </TouchableOpacity>
-        ))}
+        </View>
+
+        {/* Tab Map */}
+        <TouchableOpacity style={styles.tabItem}>
+          <Ionicons name="location-outline" size={22} color="#2B2849" style={{ opacity: 0.4 }} />
+          <Text style={styles.tabLabel}>Map</Text>
+        </TouchableOpacity>
+
+        {/* Tab Profile */}
+        <TouchableOpacity style={styles.tabItem}>
+          <Ionicons name="person-outline" size={22} color="#2B2849" style={{ opacity: 0.4 }} />
+          <Text style={styles.tabLabel}>Profile</Text>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );

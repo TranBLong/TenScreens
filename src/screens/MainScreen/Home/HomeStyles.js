@@ -1,22 +1,25 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+
+const { width } = Dimensions.get('window');
 
 export default StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#4A43EC',
   },
   container: {
     flex: 1,
+    backgroundColor: '#FFFFFF',
   },
 
   // Header
   header: {
-    backgroundColor: '#5B4FF0',
+    backgroundColor: '#4A43EC',
     paddingHorizontal: 20,
-    paddingTop: 10,
-    paddingBottom: 24,
-    borderBottomLeftRadius: 24,
-    borderBottomRightRadius: 24,
+    paddingTop: 12,
+    paddingBottom: 28,
+    borderBottomLeftRadius: 32,
+    borderBottomRightRadius: 32,
   },
   headerTop: {
     flexDirection: 'row',
@@ -26,17 +29,31 @@ export default StyleSheet.create({
   locationBox: {
     alignItems: 'center',
   },
+  locationLabelRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   locationLabel: {
-    color: '#D8D4FF',
-    fontSize: 11,
+    color: '#C2BFFF',
+    fontSize: 12,
+    marginRight: 4,
   },
   locationValue: {
     color: '#FFFFFF',
     fontSize: 14,
-    fontWeight: '600',
+    fontWeight: '700',
+    marginTop: 2,
+  },
+  notificationBtn: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    backgroundColor: 'rgba(255, 255, 255, 0.15)',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 
-  // Search
+  // Search Row
   searchRow: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -46,187 +63,276 @@ export default StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#FFFFFF',
-    borderRadius: 14,
-    paddingHorizontal: 14,
-    height: 44,
+    backgroundColor: 'transparent',
   },
   searchInput: {
     flex: 1,
-    marginLeft: 8,
-    fontSize: 14,
-    color: '#1A1A2E',
+    marginLeft: 10,
+    fontSize: 15,
+    color: '#FFFFFF',
+  },
+  searchDivider: {
+    width: 1,
+    height: 18,
+    backgroundColor: 'rgba(255, 255, 255, 0.3)',
+    marginHorizontal: 8,
   },
   filterButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#FFFFFF',
-    borderRadius: 14,
-    height: 44,
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    borderRadius: 20,
+    height: 32,
     paddingHorizontal: 12,
-    marginLeft: 10,
   },
   filterText: {
-    color: '#5B4FF0',
+    color: '#FFFFFF',
     fontSize: 12,
-    fontWeight: '600',
+    fontWeight: '500',
     marginLeft: 4,
   },
 
-  // Categories
-  categoryRow: {
-    flexDirection: 'row',
+  // Categories ScrollView
+  categoryScroll: {
+    marginTop: -18,
+  },
+  categoryContainer: {
     paddingHorizontal: 20,
-    marginTop: 20,
   },
   categoryPill: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 14,
-    paddingVertical: 8,
-    borderRadius: 20,
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+    borderRadius: 22,
     marginRight: 10,
-    opacity: 0.85,
-  },
-  categoryPillActive: {
-    opacity: 1,
+    elevation: 3,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
   },
   categoryLabel: {
     color: '#FFFFFF',
-    fontSize: 13,
+    fontSize: 14,
     fontWeight: '600',
-    marginLeft: 6,
+    marginLeft: 8,
   },
 
-  // Section header (dùng chung cho Upcoming Events & Nearby You)
+  // Section Header
   sectionHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 20,
     marginTop: 24,
-    marginBottom: 12,
+    marginBottom: 14,
   },
   sectionTitle: {
-    fontSize: 16,
-    fontWeight: '700',
-    color: '#1A1A2E',
+    fontSize: 18,
+    fontWeight: '500',
+    color: '#120D26',
+  },
+  seeAllRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   seeAll: {
     fontSize: 13,
-    color: '#5B4FF0',
-    fontWeight: '600',
+    color: '#747688',
+    marginRight: 4,
   },
 
-  // Event cards
+  // Event Cards
   eventListContent: {
     paddingLeft: 20,
     paddingRight: 8,
+    paddingBottom: 10,
   },
   eventCard: {
-    width: 170,
-    marginRight: 14,
-    borderRadius: 16,
-    backgroundColor: '#F7F7FB',
+    width: 230,
+    marginRight: 16,
+    borderRadius: 18,
+    backgroundColor: '#FFFFFF',
+    padding: 10,
+    elevation: 4,
+    shadowColor: '#505588',
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.08,
+    shadowRadius: 12,
+  },
+  imageContainer: {
+    position: 'relative',
+    borderRadius: 14,
     overflow: 'hidden',
   },
   eventImage: {
     width: '100%',
-    height: 110,
+    height: 130,
+    borderRadius: 14,
   },
   eventDateBadge: {
     position: 'absolute',
-    top: 10,
-    left: 10,
-    backgroundColor: '#FFFFFF',
-    borderRadius: 8,
-    paddingHorizontal: 6,
-    paddingVertical: 2,
+    top: 8,
+    left: 8,
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    borderRadius: 10,
+    paddingHorizontal: 8,
+    paddingVertical: 4,
     alignItems: 'center',
   },
   eventDateNum: {
-    fontSize: 13,
+    fontSize: 14,
     fontWeight: '700',
-    color: '#FF7A59',
+    color: '#F0635A',
   },
   eventDateMonth: {
     fontSize: 9,
-    color: '#8A8AA3',
+    fontWeight: '700',
+    color: '#F0635A',
+  },
+  bookmarkBadge: {
+    position: 'absolute',
+    top: 8,
+    right: 8,
+    backgroundColor: 'rgba(255, 255, 255, 0.8)',
+    borderRadius: 7,
+    width: 28,
+    height: 28,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   eventInfo: {
-    padding: 10,
+    paddingTop: 10,
+    paddingHorizontal: 4,
   },
   eventTitle: {
-    fontSize: 13,
-    fontWeight: '600',
-    color: '#1A1A2E',
+    fontSize: 15,
+    fontWeight: '700',
+    color: '#120D26',
+  },
+  goingContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 8,
+  },
+  avatarStack: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginRight: 8,
+  },
+  avatar: {
+    width: 22,
+    height: 22,
+    borderRadius: 11,
+    borderWidth: 1.5,
+    borderColor: '#FFFFFF',
+    marginLeft: -6,
   },
   eventGoing: {
-    fontSize: 11,
-    color: '#8A8AA3',
-    marginTop: 6,
+    fontSize: 12,
+    color: '#3F38DD',
+    fontWeight: '600',
   },
-
-  // Invite banner
+  locationRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 8,
+  },
+  locationText: {
+    fontSize: 12,
+    color: '#747688',
+    marginLeft: 4,
+    flex: 1,
+  },
+  // Invite Banner
   inviteBanner: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#2EC5E9',
+    backgroundColor: '#D6F7FF',
     marginHorizontal: 20,
-    marginTop: 24,
+    marginTop: 20,
     borderRadius: 18,
     padding: 18,
+    position: 'relative', // Làm gốc tọa độ cho ảnh
+    overflow: 'hidden',   // Cắt gọn phần ảnh thừa tràn ra ngoài khung
   },
   inviteTitle: {
-    color: '#FFFFFF',
-    fontSize: 15,
-    fontWeight: '700',
+    color: '#120D26',
+    fontSize: 18,
+    fontWeight: '500',
   },
   inviteSubtitle: {
-    color: '#EAFBFF',
-    fontSize: 12,
-    marginTop: 2,
+    color: '#484D70',
+    fontSize: 13,
+    marginTop: 4,
   },
   inviteButton: {
-    backgroundColor: '#00C2D1',
-    alignSelf: 'flex-start',
+    backgroundColor: '#00F8FF',
     paddingHorizontal: 16,
-    paddingVertical: 6,
-    borderRadius: 12,
-    marginTop: 10,
+    paddingVertical: 8,
+    borderRadius: 10,
+    marginTop: 12,
+    alignSelf: 'flex-start',
   },
   inviteButtonText: {
     color: '#FFFFFF',
-    fontSize: 11,
-    fontWeight: '700',
+    fontSize: 12,
+    fontWeight: '400',
+  },
+  giftImage: {
+    position: 'absolute', // Đặt ảnh chìm bên dưới
+    right: -20,           // Đẩy sát sang mép phải (chỉnh số này nếu muốn ảnh vào sâu hơn)
+    bottom: -60,          // Căn dưới đáy banner
+    width: 220,           // Tăng nhẹ kích thước ảnh để nó chờm dưới chữ đẹp hơn
+    height: 220,
+    resizeMode: 'contain',
+    zIndex: 1,            // Luôn nằm dưới khung chữ (vốn có zIndex: 2)
   },
 
-  // Bottom tab
+  // Bottom Navigation Bar
   bottomTab: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-around',
-    height: 64,
+    height: 65,
     backgroundColor: '#FFFFFF',
     borderTopWidth: 1,
-    borderTopColor: '#EFEFF5',
+    borderTopColor: '#F0F0F5',
+    elevation: 8,
   },
   tabItem: {
     alignItems: 'center',
+    justifyContent: 'center',
+    flex: 1,
   },
   tabLabel: {
-    fontSize: 10,
-    color: '#8A8AA3',
-    marginTop: 2,
+    fontSize: 11,
+    color: '#2B2849',
+    opacity: 0.4,
+    marginTop: 4,
+  },
+  activeTabLabel: {
+    color: '#5669FF',
+    opacity: 1,
+    fontWeight: '600',
+  },
+  fabContainer: {
+    top: -24,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   fab: {
-    width: 52,
-    height: 52,
-    borderRadius: 26,
-    backgroundColor: '#5B4FF0',
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    backgroundColor: '#5669FF',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: -28,
-    elevation: 4,
+    elevation: 6,
+    shadowColor: '#5669FF',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 6,
   },
 });

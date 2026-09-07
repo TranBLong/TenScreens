@@ -5,7 +5,7 @@ import SignInScreen from './Login/Sign/SignIn/SignInScreen';
 import SignUpScreen from './Login/Sign/SignUp/SignUpScreen';
 import VerificationScreen from './Login/Sign/Verification/VerificationScreen'
 import ResetPasswordScreen from './Login/Sign/ResetPassword/ResetPasswordScreen';
-import MenuScreen from "./MainScreen/Drawer/MenuScreen";
-import PushDrawerLayout from "./MainScreen/Drawer/PushDrawerLayout";
+import MenuScreen from "./MainScreen/Menu/MenuScreen";
+import PushDrawerLayout from "./MainScreen/Menu/PushDrawerLayoutScreen";
 
 export { SplashScreen, OnboardingScreen, HomeScreens, SignInScreen, SignUpScreen, VerificationScreen, ResetPasswordScreen, MenuScreen, PushDrawerLayout };
