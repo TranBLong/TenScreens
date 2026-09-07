@@ -45,8 +45,9 @@ const PushDrawerLayout = ({ isOpen, onClose, menu, children }) => {
       {/* Tự động chuyển đổi StatusBar đỉnh máy theo trạng thái Mở/Đóng Menu */}
       <StatusBar
         animated
+        translucent
         barStyle={isOpen ? 'dark-content' : 'light-content'}
-        backgroundColor={isOpen ? '#FFFFFF' : '#4A43EC'}
+        backgroundColor="transparent"
       />
 
       {/* Màn hình Menu nằm hoàn toàn phía dưới */}
