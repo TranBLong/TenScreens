@@ -9,13 +9,14 @@ import {
   ResetPasswordScreen,
   MenuScreen,
   PushDrawerLayout,
+  EventDetailsScreen,
 } from "./screens/link";
 
 export default function MainApp() {
   const [currentScreen, setCurrentScreen] = useState("splash");
   const [verifySource, setVerifySource] = useState("signup");
-  // State mới: quản lý Menu đang mở hay đóng (thay cho việc chuyển hẳn sang "menu")
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState(null);
 
   if (currentScreen === "splash") {
     return <SplashScreen onNext={() => setCurrentScreen("onboarding")} />;
@@ -70,11 +71,21 @@ export default function MainApp() {
     );
   }
 
-  // Đã bỏ nhánh currentScreen === "menu" riêng biệt.
-  // Menu giờ LUÔN đi kèm với Home, chỉ ẩn/hiện qua isMenuOpen,
-  // nên Home không bị "biến mất" khi mở Menu nữa.
+  // Màn hình Chi tiết sự kiện
+  if (currentScreen === "eventDetails") {
+    return (
+      <EventDetailsScreen
+        navigation={{
+          goBack: () => setCurrentScreen("home"),
+        }}
+        route={{
+          params: { eventData: selectedEvent },
+        }}
+      />
+    );
+  }
 
-  // Mặc định (currentScreen === "home"): render Home bọc trong PushDrawerLayout
+  // Mặc định (currentScreen === "home")
   return (
     <PushDrawerLayout
       isOpen={isMenuOpen}
@@ -82,11 +93,8 @@ export default function MainApp() {
       menu={
         <MenuScreen
           navigation={{
-            // Menu tự đóng lại sau khi bấm 1 mục bất kỳ
             navigate: (screen) => {
               setIsMenuOpen(false);
-              // TODO: nếu cần điều hướng thật (My Profile, Settings...),
-              // xử lý thêm ở đây, ví dụ: if (screen === 'Settings') setCurrentScreen('settings');
             },
             goBack: () => setIsMenuOpen(false),
           }}
@@ -95,10 +103,14 @@ export default function MainApp() {
     >
       <HomeScreens
         navigation={{
-          // Hamburger trong Home gọi navigation.dispatch(...) -> mở Menu
           dispatch: () => setIsMenuOpen(true),
-          navigate: (screen) => {
-            if (screen === "Menu" || screen === "Drawer") setIsMenuOpen(true);
+          navigate: (screen, params) => {
+            if (screen === "Menu" || screen === "Drawer") {
+              setIsMenuOpen(true);
+            } else if (screen === "EventDetails") {
+              setSelectedEvent(params?.eventData || null);
+              setCurrentScreen("eventDetails");
+            }
           },
         }}
       />
