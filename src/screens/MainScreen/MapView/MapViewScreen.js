@@ -6,21 +6,26 @@ import {
     TouchableOpacity,
     Image,
     ScrollView,
+    StatusBar,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import styles from './MapViewStyles';
 
+// Danh mục lọc - đồng bộ với HomeScreens (Sports / Music / Food / Art)
 const CATEGORIES = [
-    { id: '1', label: 'Sports', icon: 'basketball-outline', bg: '#F0635A', color: '#F0635A' },
-    { id: '2', label: 'Music', icon: 'musical-notes-outline', bg: '#5669FF', color: '#5669FF' },
-    { id: '3', label: 'Food', icon: 'restaurant-outline', bg: '#29D697', color: '#29D697' },
+    { id: '1', label: 'Sports', icon: 'basketball-outline', bg: '#F0635A' },
+    { id: '2', label: 'Music', icon: 'musical-notes-outline', bg: '#5669FF' },
+    { id: '3', label: 'Food', icon: 'restaurant-outline', bg: '#29D697' },
+    { id: '4', label: 'Art', icon: 'color-palette-outline', bg: '#00D2FF' },
 ];
 
+// Vị trí các marker trên bản đồ, mỗi marker gắn với 1 category ở trên
 const MAP_MARKERS = [
-    { id: '1', type: 'food', icon: 'restaurant-outline', bg: '#29D697', top: '28%', left: '60%' },
-    { id: '2', type: 'music', icon: 'musical-notes-outline', bg: '#5669FF', top: '36%', left: '25%' },
-    { id: '3', type: 'sports', icon: 'basketball-outline', bg: '#F0635A', top: '52%', left: '33%' },
+    { id: '1', categoryId: '3', icon: 'restaurant-outline', bg: '#29D697', top: '26%', left: '58%' },
+    { id: '2', categoryId: '2', icon: 'musical-notes-outline', bg: '#5669FF', top: '36%', left: '25%' },
+    { id: '3', categoryId: '4', icon: 'color-palette-outline', bg: '#00D2FF', top: '42%', left: '68%' },
+    { id: '4', categoryId: '1', icon: 'basketball-outline', bg: '#F0635A', top: '54%', left: '33%' },
 ];
 
 const MapViewScreen = ({ navigation }) => {
@@ -29,46 +34,72 @@ const MapViewScreen = ({ navigation }) => {
 
     const activeEvent = {
         id: '1',
-        date: 'Wed, Apr 28 • 5:30 PM',
         title: "Jo Malone London's Mother's Day Presents",
+        date: 'Wed, Apr 28, 2026',
+        time: 'Wednesday, 5:30 PM - 9:00 PM',
+        location: 'Radius Gallery',
         address: 'Radius Gallery - Santa Cruz, CA',
         image: require('../../../../assets/images/home/mainscreens/handmotherandson.png'),
+        organizer: {
+            name: 'Ashfak Sayem',
+            role: 'Organizer',
+            avatar: require('../../../../assets/images/home/mainscreens/eventdetail/seesky.png'),
+        },
+        about: 'Enjoy your favorite dishes and a lovely time with your friends and family.',
+        price: '$120',
     };
 
     return (
         <View style={styles.container}>
-            {/* ---------- Layer 1: Bản đồ ---------- */}
+            {/* 2. Cấu hình StatusBar trong suốt và đè lên giao diện */}
+            <StatusBar
+                translucent
+                backgroundColor="transparent"
+                barStyle="dark-content"
+            />
+            {/* ---------- Layer 1: Bản đồ (nền giả lập) ---------- */}
             <View style={styles.mapBackground}>
-                <Text style={styles.mapRoadLabel}>NORTHEAST BELLEVUE</Text>
-                <View style={[styles.roadLine, { top: '42%', width: '100%', transform: [{ rotate: '-15deg' }] }]} />
-                <View style={[styles.roadLine, { top: '55%', width: '100%', transform: [{ rotate: '25deg' }] }]} />
+                <Image
+                    source={require('../../../../assets/images/home/mainscreens/mapview/map.png')}
+                    style={styles.mapImageBackground}
+                    resizeMode="cover"
+                />
 
+                {/* Các ghim sự kiện vẫn đè lên ảnh bản đồ */}
                 {MAP_MARKERS.map((marker) => (
                     <TouchableOpacity
                         key={marker.id}
-                        style={[styles.markerPin, { top: marker.top, left: marker.left, backgroundColor: marker.bg }]}
+                        style={[styles.markerPin, { top: marker.top, left: marker.left }]}
                         activeOpacity={0.8}
+                        onPress={() => navigation?.navigate?.('EventDetails', { eventData: activeEvent })}
                     >
-                        <Ionicons name={marker.icon} size={16} color="#FFFFFF" />
+                        {/* Khung viền trắng chứa icon */}
+                        <View style={styles.markerBadge}>
+                            <View style={[styles.innerIconBox, { backgroundColor: marker.bg }]}>
+                                <Ionicons name={marker.icon} size={16} color="#FFFFFF" />
+                            </View>
+                        </View>
+
+                        {/* Mũi tên chỉ xuống màu trắng */}
+                        <View style={styles.markerArrow} />
                     </TouchableOpacity>
                 ))}
             </View>
 
-            {/* ---------- Layer 2: Giao diện đè ---------- */}
+            {/* ---------- Layer 2: Giao diện đè lên bản đồ ---------- */}
             <SafeAreaView style={styles.overlayContainer} pointerEvents="box-none">
 
-                {/* Top Section */}
+                {/* Top Section: thanh tìm kiếm + danh mục lọc */}
                 <View style={styles.topSection} pointerEvents="box-none">
                     <View style={styles.topBar}>
-                        <TouchableOpacity
-                            style={styles.backButton}
-                            onPress={() => navigation?.goBack?.()}
-                        >
-                            <Ionicons name="chevron-back" size={20} color="#120D26" />
-                        </TouchableOpacity>
-
                         <View style={styles.searchBox}>
-                            <Ionicons name="search-outline" size={18} color="#747688" style={{ marginRight: 6 }} />
+                            <TouchableOpacity
+                                style={styles.inlineBackButton}
+                                onPress={() => navigation?.goBack?.()}
+                            >
+                                <Ionicons name="chevron-back" size={22} color="#120D26" />
+                            </TouchableOpacity>
+
                             <TextInput
                                 placeholder="Find for food or restaurant..."
                                 placeholderTextColor="#747688"
@@ -79,11 +110,11 @@ const MapViewScreen = ({ navigation }) => {
                         </View>
 
                         <TouchableOpacity style={styles.gpsButton}>
-                            <Ionicons name="navigate-outline" size={18} color="#5669FF" />
+                            <Ionicons name="locate-outline" size={18} color="#5669FF" />
                         </TouchableOpacity>
                     </View>
 
-                    {/* Danh mục lọc */}
+                    {/* Danh mục lọc dạng pill cuộn ngang */}
                     <ScrollView
                         horizontal
                         showsHorizontalScrollIndicator={false}
@@ -104,7 +135,7 @@ const MapViewScreen = ({ navigation }) => {
                                     <Ionicons
                                         name={cat.icon}
                                         size={18}
-                                        color={isSelected ? '#FFFFFF' : cat.color}
+                                        color={isSelected ? '#FFFFFF' : cat.bg}
                                     />
                                     <Text style={[styles.categoryLabel, { color: isSelected ? '#FFFFFF' : '#747688' }]}>
                                         {cat.label}
@@ -115,10 +146,10 @@ const MapViewScreen = ({ navigation }) => {
                     </ScrollView>
                 </View>
 
-                {/* Bottom Section */}
+                {/* Bottom Section: nút định vị + card sự kiện đang chọn */}
                 <View style={styles.bottomSection} pointerEvents="box-none">
                     <TouchableOpacity style={styles.myLocationFab}>
-                        <Ionicons name="compass-outline" size={22} color="#FFFFFF" />
+                        <Ionicons name="options-outline" size={20} color="#FFFFFF" />
                     </TouchableOpacity>
 
                     <TouchableOpacity
@@ -139,7 +170,7 @@ const MapViewScreen = ({ navigation }) => {
                                 </TouchableOpacity>
                             </View>
 
-                            <Text style={styles.eventTitle} numberOfLines={1}>
+                            <Text style={styles.eventTitle} numberOfLines={2}>
                                 {activeEvent.title}
                             </Text>
 

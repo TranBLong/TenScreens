@@ -19,6 +19,9 @@ export default function MainApp() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
 
+  // State lưu nguồn mở EventDetails ('home' hoặc 'map')
+  const [eventSource, setEventSource] = useState("home");
+
   if (currentScreen === "splash") {
     return <SplashScreen onNext={() => setCurrentScreen("onboarding")} />;
   }
@@ -77,7 +80,8 @@ export default function MainApp() {
     return (
       <EventDetailsScreen
         navigation={{
-          goBack: () => setCurrentScreen("home"),
+          // Quay lại đúng màn hình trước đó (home hoặc map)
+          goBack: () => setCurrentScreen(eventSource),
         }}
         route={{
           params: { eventData: selectedEvent },
@@ -95,6 +99,7 @@ export default function MainApp() {
           navigate: (screen, params) => {
             if (screen === "EventDetails") {
               setSelectedEvent(params?.eventData || null);
+              setEventSource("map"); // Lưu vết đến từ map
               setCurrentScreen("eventDetails");
             }
           },
@@ -113,6 +118,12 @@ export default function MainApp() {
           navigation={{
             navigate: (screen) => {
               setIsMenuOpen(false);
+              // Xử lý chuyển màn hình từ Menu Drawer
+              if (screen === "map" || screen === "MapViewScreen") {
+                setCurrentScreen("map");
+              } else if (screen === "signin" || screen === "SignOut") {
+                setCurrentScreen("signin");
+              }
             },
             goBack: () => setIsMenuOpen(false),
           }}
@@ -127,9 +138,10 @@ export default function MainApp() {
               setIsMenuOpen(true);
             } else if (screen === "EventDetails") {
               setSelectedEvent(params?.eventData || null);
+              setEventSource("home"); // Lưu vết đến từ home
               setCurrentScreen("eventDetails");
             } else if (screen === "MapViewScreen" || screen === "map") {
-              setCurrentScreen("map"); // Chuyển state màn hình sang bản đồ
+              setCurrentScreen("map");
             }
           },
         }}

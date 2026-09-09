@@ -3,13 +3,14 @@ import { StyleSheet } from 'react-native';
 export default StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#EBECEF',
+        backgroundColor: '#FFFFFF',
     },
-
-    // Fake Map
     mapBackground: {
-        ...StyleSheet.absoluteFillObject,
-        backgroundColor: '#F4F4F6',
+        ...StyleSheet.absoluteFillObject, // Giúp bản đồ kéo dài tràn 4 mép màn hình
+    },
+    mapImageBackground: {
+        width: '100%',
+        height: '100%',
     },
     roadLine: {
         position: 'absolute',
@@ -21,8 +22,8 @@ export default StyleSheet.create({
     },
     mapRoadLabel: {
         position: 'absolute',
-        top: '36%',
-        right: '10%',
+        top: '30%',
+        right: '6%',
         fontSize: 13,
         fontWeight: '700',
         color: '#CBCBD0',
@@ -30,16 +31,32 @@ export default StyleSheet.create({
     },
     markerPin: {
         position: 'absolute',
-        width: 34,
-        height: 34,
+        alignItems: 'center', // Căn mũi tên nằm chính giữa
+    },
+    markerBadge: {
+        backgroundColor: '#FFFFFF',
+        padding: 5, // Độ dày của khung màu trắng bao quanh
+        borderRadius: 16,
+    },
+    innerIconBox: {
+        width: 32,
+        height: 32,
         borderRadius: 10,
         justifyContent: 'center',
         alignItems: 'center',
-        elevation: 4,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.2,
-        shadowRadius: 4,
+    },
+    markerArrow: {
+        width: 0,
+        height: 0,
+        backgroundColor: 'transparent',
+        borderStyle: 'solid',
+        borderLeftWidth: 6,
+        borderRightWidth: 6,
+        borderTopWidth: 7,
+        borderLeftColor: 'transparent',
+        borderRightColor: 'transparent',
+        borderTopColor: '#FFFFFF', // Cùng màu với badge trắng
+        marginTop: -1, // Đè nhẹ 1px để xóa vệt hở giáp ranh
     },
 
     // Overlays
@@ -62,33 +79,24 @@ export default StyleSheet.create({
         paddingHorizontal: 16,
         paddingTop: 8,
     },
-    backButton: {
-        width: 42,
-        height: 42,
-        borderRadius: 12,
+    searchBox: {
+        flex: 1,
+        height: 44,
         backgroundColor: '#FFFFFF',
-        justifyContent: 'center',
+        borderRadius: 14,
+        marginRight: 10,
+        flexDirection: 'row',
         alignItems: 'center',
+        paddingHorizontal: 10,
         elevation: 3,
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.1,
         shadowRadius: 4,
     },
-    searchBox: {
-        flex: 1,
-        height: 42,
-        backgroundColor: '#FFFFFF',
-        borderRadius: 12,
-        marginHorizontal: 10,
-        flexDirection: 'row',
-        alignItems: 'center',
-        paddingHorizontal: 12,
-        elevation: 3,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.1,
-        shadowRadius: 4,
+    inlineBackButton: {
+        padding: 4,
+        marginRight: 6,
     },
     searchInput: {
         flex: 1,
@@ -97,9 +105,9 @@ export default StyleSheet.create({
         paddingVertical: 0,
     },
     gpsButton: {
-        width: 42,
-        height: 42,
-        borderRadius: 12,
+        width: 44,
+        height: 44,
+        borderRadius: 14,
         backgroundColor: '#FFFFFF',
         justifyContent: 'center',
         alignItems: 'center',
@@ -138,7 +146,7 @@ export default StyleSheet.create({
         marginLeft: 6,
     },
 
-    // Location FAB
+    // Location FAB (nút tuỳ chọn cạnh card sự kiện)
     myLocationFab: {
         width: 44,
         height: 44,
@@ -186,21 +194,22 @@ export default StyleSheet.create({
         alignItems: 'center',
     },
     eventDate: {
-        fontSize: 11,
+        fontSize: 13,
         color: '#5669FF',
-        fontWeight: '600',
+        fontWeight: '400',
     },
     eventTitle: {
-        fontSize: 14,
-        fontWeight: '700',
+        fontSize: 15,
+        fontWeight: '500',
         color: '#120D26',
+        lineHeight: 20, // Giúp khoảng cách giữa các dòng thoáng hơn
     },
     locationRow: {
         flexDirection: 'row',
         alignItems: 'center',
     },
     locationText: {
-        fontSize: 11,
+        fontSize: 13,
         color: '#747688',
         marginLeft: 4,
         flex: 1,
