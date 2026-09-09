@@ -263,9 +263,11 @@ const HomeScreen = ({ navigation }) => {
             <MaterialIcons name="add-box" size={22} color="#FFFFFF" />
           </TouchableOpacity>
         </View>
-
         {/* Tab Map */}
-        <TouchableOpacity style={styles.tabItem}>
+        <TouchableOpacity
+          style={styles.tabItem}
+          onPress={() => navigation.navigate('MapViewScreen')}
+        >
           <Ionicons name="location-outline" size={22} color="#2B2849" style={{ opacity: 0.4 }} />
           <Text style={styles.tabLabel}>Map</Text>
         </TouchableOpacity>

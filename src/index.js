@@ -10,6 +10,7 @@ import {
   MenuScreen,
   PushDrawerLayout,
   EventDetailsScreen,
+  MapViewScreen,
 } from "./screens/link";
 
 export default function MainApp() {
@@ -85,6 +86,23 @@ export default function MainApp() {
     );
   }
 
+  // Màn hình Bản đồ
+  if (currentScreen === "map") {
+    return (
+      <MapViewScreen
+        navigation={{
+          goBack: () => setCurrentScreen("home"),
+          navigate: (screen, params) => {
+            if (screen === "EventDetails") {
+              setSelectedEvent(params?.eventData || null);
+              setCurrentScreen("eventDetails");
+            }
+          },
+        }}
+      />
+    );
+  }
+
   // Mặc định (currentScreen === "home")
   return (
     <PushDrawerLayout
@@ -110,6 +128,8 @@ export default function MainApp() {
             } else if (screen === "EventDetails") {
               setSelectedEvent(params?.eventData || null);
               setCurrentScreen("eventDetails");
+            } else if (screen === "MapViewScreen" || screen === "map") {
+              setCurrentScreen("map"); // Chuyển state màn hình sang bản đồ
             }
           },
         }}

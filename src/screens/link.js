@@ -8,5 +8,6 @@ import ResetPasswordScreen from './Login/Sign/ResetPassword/ResetPasswordScreen'
 import MenuScreen from "./MainScreen/Menu/MenuScreen";
 import PushDrawerLayout from "./MainScreen/Menu/PushDrawerLayoutScreen";
 import EventDetailsScreen from "./MainScreen/EventDetails/EventDetailsScreen";
+import MapViewScreen from "./MainScreen/MapView/MapViewScreen";
 
-export { SplashScreen, OnboardingScreen, HomeScreens, SignInScreen, SignUpScreen, VerificationScreen, ResetPasswordScreen, MenuScreen, PushDrawerLayout, EventDetailsScreen };
+export { SplashScreen, OnboardingScreen, HomeScreens, SignInScreen, SignUpScreen, VerificationScreen, ResetPasswordScreen, MenuScreen, PushDrawerLayout, EventDetailsScreen, MapViewScreen };
