@@ -3,50 +3,55 @@ import { StyleSheet } from 'react-native';
 export default StyleSheet.create({
     safeArea: {
         flex: 1,
-        backgroundColor: '#FAFAFA', // Màu nền nhạt để nổi bật các card trắng
+        backgroundColor: '#FFFFFF',
     },
     container: {
         flex: 1,
+        backgroundColor: '#FFFFFF',
     },
 
-    // Header
+    // Header cố định
     header: {
         flexDirection: 'row',
         alignItems: 'center',
         paddingHorizontal: 20,
-        paddingTop: 10,
-        paddingBottom: 15,
+        paddingTop: 8,
+        paddingBottom: 12,
+        backgroundColor: '#FFFFFF',
     },
     backButton: {
         marginRight: 12,
+        padding: 4,
     },
     headerTitle: {
         fontSize: 24,
-        fontWeight: '500',
+        fontWeight: '400',
         color: '#120D26',
     },
 
-    // Search Input
+    // Search input cố định
     searchRow: {
         flexDirection: 'row',
         alignItems: 'center',
         marginHorizontal: 20,
-        marginBottom: 20,
+        marginBottom: 16,
+        backgroundColor: '#FFFFFF',
     },
     searchIcon: {
-        marginRight: 8,
+        marginRight: 6,
     },
     searchDivider: {
         width: 1,
-        height: 24,
-        backgroundColor: '#5669FF',
-        marginHorizontal: 8,
+        height: 20,
+        backgroundColor: '#E4DFDF',
+        marginRight: 10,
     },
     searchInput: {
         flex: 1,
-        fontSize: 20,
+        fontSize: 24,
         color: '#120D26',
-        fontWeight: '400',
+        fontWeight: '300',
+        paddingVertical: 4,
     },
     filterButton: {
         flexDirection: 'row',
@@ -55,24 +60,28 @@ export default StyleSheet.create({
         paddingHorizontal: 12,
         paddingVertical: 8,
         borderRadius: 20,
-        marginLeft: 10,
-        elevation: 3, // Bóng cho android
-        shadowColor: '#5669FF', // Bóng cho iOS
-        shadowOffset: { width: 0, height: 4 },
+        marginLeft: 8,
+        elevation: 3,
+        shadowColor: '#5669FF',
+        shadowOffset: { width: 0, height: 3 },
         shadowOpacity: 0.25,
-        shadowRadius: 8,
+        shadowRadius: 6,
     },
     filterText: {
         color: '#FFFFFF',
         fontSize: 12,
         fontWeight: '500',
-        marginLeft: 6,
+        marginLeft: 4,
     },
 
-    // Event List
+    // Khung danh sách cuộn tràn màn hình
+    listContainer: {
+        flex: 1,
+    },
     listContent: {
         paddingHorizontal: 20,
-        paddingBottom: 20,
+        paddingTop: 8,
+        paddingBottom: 40, // Đảm bảo cuộn tới phần tử cuối mà không bị cấn viền dưới
     },
     eventCard: {
         flexDirection: 'row',
@@ -80,15 +89,15 @@ export default StyleSheet.create({
         borderRadius: 16,
         padding: 10,
         marginBottom: 16,
-        elevation: 2, // Bóng cho android
-        shadowColor: '#505588', // Bóng cho iOS
+        elevation: 3,
+        shadowColor: '#505588',
         shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.06,
+        shadowOpacity: 0.08,
         shadowRadius: 10,
     },
     eventImage: {
-        width: 86,
-        height: 86,
+        width: 80,
+        height: 80,
         borderRadius: 12,
     },
     eventInfo: {
@@ -99,14 +108,14 @@ export default StyleSheet.create({
     eventDate: {
         color: '#5669FF',
         fontSize: 12,
-        fontWeight: '600',
+        fontWeight: '400',
         textTransform: 'uppercase',
-        marginBottom: 6,
+        marginBottom: 4,
     },
     eventTitle: {
         color: '#120D26',
-        fontSize: 16,
-        fontWeight: '500',
-        lineHeight: 22,
+        fontSize: 18,
+        fontWeight: '600',
+        lineHeight: 25,
     },
 });

@@ -11,6 +11,7 @@ import {
   PushDrawerLayout,
   EventDetailsScreen,
   MapViewScreen,
+  SearchScreen,
 } from "./screens/link";
 
 export default function MainApp() {
@@ -152,6 +153,8 @@ export default function MainApp() {
               setCurrentScreen("eventDetails");
             } else if (screen === "MapViewScreen" || screen === "map") {
               setCurrentScreen("map");
+            } else if (screen === "search") {
+              setCurrentScreen("search");
             }
           },
         }}
