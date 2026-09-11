@@ -92,17 +92,21 @@ const HomeScreen = ({ navigation }) => {
 
           {/* Search bar */}
           <View style={styles.searchRow}>
-            <View style={styles.searchBox}>
+            <TouchableOpacity
+              style={styles.searchBox}
+              activeOpacity={0.8}
+              onPress={() => navigation.navigate('search')}
+            >
               <Ionicons name="search" size={20} color="#FFFFFF" />
               <View style={styles.searchDivider} />
               <TextInput
                 placeholder="Search..."
                 placeholderTextColor="rgba(255, 255, 255, 0.6)"
                 style={styles.searchInput}
-                value={searchText}
-                onChangeText={setSearchText}
+                editable={false}
+                pointerEvents="none"
               />
-            </View>
+            </TouchableOpacity>
 
             <TouchableOpacity
               style={styles.filterButton}

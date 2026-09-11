@@ -107,6 +107,16 @@ export default function MainApp() {
       />
     );
   }
+  // Màn hình Search
+  if (currentScreen === "search") {
+    return (
+      <SearchScreen
+        navigation={{
+          goBack: () => setCurrentScreen("home")
+        }}
+      />
+    );
+  }
 
   // Mặc định (currentScreen === "home")
   return (
