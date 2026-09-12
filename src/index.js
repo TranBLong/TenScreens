@@ -12,6 +12,7 @@ import {
   EventDetailsScreen,
   MapViewScreen,
   SearchScreen,
+  EmptyEventScreen,
 } from "./screens/link";
 
 export default function MainApp() {
@@ -119,6 +120,22 @@ export default function MainApp() {
     );
   }
 
+  // THÊM MỚI: Màn hình Empty Events
+  if (currentScreen === "emptyEvent") {
+    return (
+      <EmptyEventScreen
+        navigation={{
+          goBack: () => setCurrentScreen("home"),
+          navigate: (screen) => {
+            if (screen === "home") {
+              setCurrentScreen("home");
+            }
+          }
+        }}
+      />
+    );
+  }
+
   // Mặc định (currentScreen === "home")
   return (
     <PushDrawerLayout
@@ -155,6 +172,8 @@ export default function MainApp() {
               setCurrentScreen("map");
             } else if (screen === "search") {
               setCurrentScreen("search");
+            } else if (screen === "EmptyEventScreen") {
+              setCurrentScreen("emptyEvent");
             }
           },
         }}

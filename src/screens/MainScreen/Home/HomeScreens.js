@@ -253,7 +253,10 @@ const HomeScreen = ({ navigation }) => {
         </TouchableOpacity>
 
         {/* Tab Events */}
-        <TouchableOpacity style={styles.tabItem}>
+        <TouchableOpacity
+          style={styles.tabItem}
+          onPress={() => navigation.navigate('EmptyEventScreen')}
+        >
           <Ionicons name="calendar-outline" size={22} color="#2B2849" style={{ opacity: 0.4 }} />
           <Text style={styles.tabLabel}>Events</Text>
         </TouchableOpacity>
