@@ -13,6 +13,7 @@ import {
   MapViewScreen,
   SearchScreen,
   EmptyEventScreen,
+  SeeAllEventsScreen,
 } from "./screens/link";
 
 export default function MainApp() {
@@ -129,6 +130,27 @@ export default function MainApp() {
           navigate: (screen) => {
             if (screen === "home") {
               setCurrentScreen("home");
+            } else if (screen === "SeeAllEvents") {
+              setCurrentScreen("seeAllEvents"); // Chuyển sang màn See All Events
+            }
+          }
+        }}
+      />
+    );
+  }
+
+  // Màn hình See All Events
+  if (currentScreen === "seeAllEvents") {
+    return (
+      <SeeAllEventsScreen
+        navigation={{
+          goBack: () => setCurrentScreen("emptyEvent"),
+          navigate: (screen, params) => {
+            if (screen === "search") setCurrentScreen("search");
+            else if (screen === "EventDetails") {
+              setSelectedEvent(params?.eventData || null);
+              setEventSource("seeAllEvents");
+              setCurrentScreen("eventDetails");
             }
           }
         }}

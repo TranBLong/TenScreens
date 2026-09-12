@@ -59,7 +59,7 @@ const EmptyEventScreen = ({ navigation }) => {
                 <View style={styles.emptyContent}>
                     {/* Bạn cần trỏ đúng tới đường dẫn lưu ảnh cái lịch mờ nhé */}
                     <Image
-                        source={require('../../../../assets/images/home/event/calendarclock.png')}
+                        source={require('../../../../assets/images/home/mainscreens/event/calendarclock.png')}
                         style={styles.emptyImage}
                         resizeMode="contain"
                     />
@@ -74,7 +74,7 @@ const EmptyEventScreen = ({ navigation }) => {
                     <TouchableOpacity
                         style={styles.exploreButton}
                         activeOpacity={0.8}
-                        onPress={() => navigation?.navigate('home')} // Điều hướng về Home hoặc Explore tuỳ logic
+                        onPress={() => navigation?.navigate('SeeAllEvents')} // Điều hướng về Home hoặc Explore tuỳ logic
                     >
                         <Text style={styles.exploreButtonText}>EXPLORE EVENTS</Text>
                         <View style={styles.arrowCircle}>
