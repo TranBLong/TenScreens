@@ -1,12 +1,17 @@
 import { StyleSheet, Dimensions } from 'react-native';
 
-const { height } = Dimensions.get('window');
+const { height: SCREEN_HEIGHT } = Dimensions.get('screen');
 
 export default StyleSheet.create({
     overlay: {
         flex: 1,
-        backgroundColor: 'rgba(0, 0, 0, 0.4)', // Nền tối trong suốt
         justifyContent: 'flex-end',
+        width: '100%',
+        height: '100%',
+    },
+    backdrop: {
+        ...StyleSheet.absoluteFillObject,
+        backgroundColor: '#000000',
     },
     touchableClose: {
         flex: 1,
@@ -18,21 +23,21 @@ export default StyleSheet.create({
         paddingHorizontal: 24,
         paddingTop: 12,
         paddingBottom: 24,
-        height: height * 0.85, // Chiếm 85% màn hình
+        height: SCREEN_HEIGHT * 0.82, // Chiếm khoảng 82% chiều cao màn hình
     },
     indicatorContainer: {
         alignItems: 'center',
         marginBottom: 16,
     },
     indicator: {
-        width: 36,
+        width: 38,
         height: 5,
         backgroundColor: '#E4DFDF',
         borderRadius: 3,
     },
     title: {
         fontSize: 24,
-        fontWeight: '500',
+        fontWeight: '400',
         color: '#120D26',
         marginBottom: 20,
     },
@@ -224,6 +229,7 @@ export default StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         marginTop: 10,
+        paddingBottom: 10,
     },
     resetBtn: {
         flex: 1,

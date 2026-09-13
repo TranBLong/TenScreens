@@ -11,6 +11,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import styles from './SearchStyles';
+import FilterScreen from '../Filter/FilterScreen';
 
 const SEARCH_RESULTS = [
     {
@@ -47,6 +48,7 @@ const SEARCH_RESULTS = [
 
 const SearchScreen = ({ navigation }) => {
     const [searchText, setSearchText] = useState('');
+    const [isFilterVisible, setIsFilterVisible] = useState(false);
 
     const renderEventCard = ({ item }) => (
         <TouchableOpacity style={styles.eventCard} activeOpacity={0.8}>
@@ -85,7 +87,10 @@ const SearchScreen = ({ navigation }) => {
                         onChangeText={setSearchText}
                         autoFocus={true}
                     />
-                    <TouchableOpacity style={styles.filterButton}>
+                    <TouchableOpacity
+                        style={styles.filterButton}
+                        onPress={() => setIsFilterVisible(true)}
+                    >
                         <Ionicons name="options" size={16} color="#FFFFFF" />
                         <Text style={styles.filterText}>Filters</Text>
                     </TouchableOpacity>
@@ -99,6 +104,12 @@ const SearchScreen = ({ navigation }) => {
                     style={styles.listContainer}
                     contentContainerStyle={styles.listContent}
                     renderItem={renderEventCard}
+                />
+
+                {/* Bottom sheet Filter - trượt lên khi isFilterVisible = true */}
+                <FilterScreen
+                    visible={isFilterVisible}
+                    navigation={{ goBack: () => setIsFilterVisible(false) }}
                 />
             </View>
         </SafeAreaView>
