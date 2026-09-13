@@ -12,5 +12,6 @@ import MapViewScreen from "./MainScreen/MapView/MapViewScreen";
 import SearchScreen from './MainScreen/Search/SearchScreen';
 import EmptyEventScreen from './MainScreen/Events/EmptyEventScreen';
 import SeeAllEventsScreen from './MainScreen/Events/SeeAllEventsScreen';
+import FilterScreen from './MainScreen/Filter/FilterScreen';
 
-export { SplashScreen, OnboardingScreen, HomeScreens, SignInScreen, SignUpScreen, VerificationScreen, ResetPasswordScreen, MenuScreen, PushDrawerLayout, EventDetailsScreen, MapViewScreen, SearchScreen, EmptyEventScreen, SeeAllEventsScreen };
+export { SplashScreen, OnboardingScreen, HomeScreens, SignInScreen, SignUpScreen, VerificationScreen, ResetPasswordScreen, MenuScreen, PushDrawerLayout, EventDetailsScreen, MapViewScreen, SearchScreen, EmptyEventScreen, SeeAllEventsScreen, FilterScreen };

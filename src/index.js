@@ -158,6 +158,17 @@ export default function MainApp() {
     );
   }
 
+  // Màn hình Filter (Bottom Sheet)
+  if (currentScreen === "Filter") {
+    return (
+      <FilterModal
+        navigation={{
+          goBack: () => setCurrentScreen("home")
+        }}
+      />
+    );
+  }
+
   // Mặc định (currentScreen === "home")
   return (
     <PushDrawerLayout
